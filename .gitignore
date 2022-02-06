@@ -138,5 +138,6 @@ dmypy.json
 cython_debug/
 
 # my
+.idea/
 media/
 notes.md
