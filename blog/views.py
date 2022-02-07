@@ -30,7 +30,7 @@ def serialize_post_optimized(post):
         'title': post.title,
         'teaser_text': post.text[:200],
         'author': post.author.username,
-        'comments_amount': post.comment__count,
+        'comments_amount': post.comments__count,
         'image_url': post.image.url if post.image else None,
         'published_at': post.published_at,
         'slug': post.slug,
@@ -51,7 +51,7 @@ def index(request):
 
     most_popular_posts = posts_pref.annotate(
         Count('likes', distinct=True)).annotate(
-        Count('comment', distinct=True)).order_by('-likes__count')[:5]
+        Count('comments', distinct=True)).order_by('-likes__count')[:5]
 
     most_fresh_posts = posts_pref.order_by('-published_at')[:5]
 
