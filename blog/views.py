@@ -53,7 +53,8 @@ def index(request):
         Count('likes', distinct=True)).annotate(
         Count('comments', distinct=True)).order_by('-likes__count')[:5]
 
-    most_fresh_posts = posts_pref.order_by('-published_at')[:5]
+    most_fresh_posts = posts_pref.annotate(
+        Count('comments')).order_by('-published_at')[:5]
 
     most_popular_tags = Tag.objects.annotate(
         tags_amount=Count('posts')).order_by('-tags_amount')[:5]
@@ -62,7 +63,7 @@ def index(request):
         'most_popular_posts': [
             serialize_post_optimized(post) for post in most_popular_posts
         ],
-        'page_posts': [serialize_post(post) for post in
+        'page_posts': [serialize_post_optimized(post) for post in
                        most_fresh_posts],
         'popular_tags': [serialize_tag(tag) for tag in most_popular_tags],
     }
