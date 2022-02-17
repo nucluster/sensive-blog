@@ -13,3 +13,9 @@ class PostAdmin(admin.ModelAdmin):
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     raw_id_fields = ('post', 'author',)
+
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    pass
+
