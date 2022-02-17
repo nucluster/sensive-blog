@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from blog.models import Comment, Post, Tag
-from django.db.models import Count
-from django.db.models import Prefetch
+from django.db.models import Count, Prefetch
 
 
 def serialize_post(post):
